@@ -1,19 +1,13 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        // Obsługa braku tokena (użytkownik nie jest zalogowany lub token wygasł)
-        throw new Error('Brak autoryzacji');
-      }
-
-      const response = await axios.get('/contacts', {
-        headers: { Authorization: token },
-      });
+      const response = await axios.get('/contacts');
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
