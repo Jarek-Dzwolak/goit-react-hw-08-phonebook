@@ -33,6 +33,7 @@ export const ContactForm = () => {
         placeholder="Name"
         value={name}
         onChange={event => setName(event.target.value)}
+        pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
       />
       <input
         className={styles.input}
@@ -41,6 +42,7 @@ export const ContactForm = () => {
         placeholder="Phone number"
         value={number}
         onChange={event => setNumber(event.target.value)}
+        pattern="^\d{3}-\d{3}-\d{3}$"
       />
       <button className={styles.button} type="submit">
         Add Contact
