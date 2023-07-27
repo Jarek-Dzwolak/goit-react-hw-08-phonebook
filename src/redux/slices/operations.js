@@ -2,63 +2,52 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchContacts = createAsyncThunk(
-  'contacts/fetchContacts',
-  async () => {
+  'contacts/fetchAll',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get(
-        'https://64b97ab779b7c9def6c11a2c.mockapi.io/contacts/contacts'
-      );
+      const token = localStorage.getItem('token');
+      if (!token) {
+        // Obsługa braku tokena (użytkownik nie jest zalogowany lub token wygasł)
+        throw new Error('Brak autoryzacji');
+      }
+
+      const response = await axios.get('/contacts', {
+        headers: { Authorization: token },
+      });
       return response.data;
-    } catch (error) {
-      throw new Error('Failed to fetch contacts.');
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
-
-// Akcja do dodawania kontaktu
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async contactData => {
+  async (contact, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const contacts = state.contacts.names;
+    const existingContact = contacts.find(c => c.name === contact.name);
+    if (existingContact) {
+      alert(`${existingContact.name} is already in your contacts`);
+      return thunkAPI.rejectWithValue('Kontakt już istnieje');
+    }
     try {
-      const response = await axios.post(
-        'https://64b97ab779b7c9def6c11a2c.mockapi.io/contacts/contacts',
-        contactData
-      );
+      const response = await axios.post('/contacts', contact);
       return response.data;
-    } catch (error) {
-      throw new Error('Failed to save contact.');
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
-// Akcja do usuwania kontaktu
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async contactId => {
+  async (contactId, thunkAPI) => {
     try {
-      await axios.delete(
-        `https://64b97ab779b7c9def6c11a2c.mockapi.io/contacts/contacts/${contactId}`
-      );
-      return contactId;
-    } catch (error) {
-      throw new Error('Failed to delete contact.');
-    }
-  }
-);
-
-// Akcja do aktualizowania danych kontaktu
-export const updateContact = createAsyncThunk(
-  'contacts/updateContact',
-  async (contact, thunkApi) => {
-    try {
-      const response = await axios.put(
-        `https://64b97ab779b7c9def6c11a2c.mockapi.io/contacts/contacts/${contact.id}`,
-        contact
-      );
+      const response = await axios.delete(`/contacts/${contactId}`);
       return response.data;
-    } catch (error) {
-      throw new Error('Failed to update contact.');
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );

@@ -4,7 +4,7 @@ import { fetchContacts } from '../../../redux/slices/operations';
 import ContactItem from '../ContactItem/ContactItem';
 import styles from './ContactList.module.css';
 
-const ContactList = () => {
+export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   const isLoading = useSelector(state => state.contacts.isLoading);
   const filterValue = useSelector(state => state.contacts.filter); // Pobieramy wartość filtru z redux store

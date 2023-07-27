@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addContact } from '../../../redux/slices/operations';
 import styles from './ContactForm.module.css';
 
-const ContactForm = () => {
+export const ContactForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -37,7 +37,7 @@ const ContactForm = () => {
       />
       <input
         className={styles.input}
-        type="tel"
+        type="text"
         name="number"
         placeholder="Phone number"
         value={number}

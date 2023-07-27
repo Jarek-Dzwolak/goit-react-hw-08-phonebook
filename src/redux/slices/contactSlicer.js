@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchContacts,
-  addContact,
-  deleteContact,
-  updateContact,
-} from './operations'; // Tu umieść odpowiednie funkcje do komunikacji z backendem
+import { fetchContacts, addContact, deleteContact } from './operations'; // Tu umieść odpowiednie funkcje do komunikacji z backendem
 
 const handlePending = state => {
   state.isLoading = true;
@@ -49,17 +44,7 @@ const contactSlice = createSlice({
           contact => contact.id !== action.payload
         );
       })
-      .addCase(deleteContact.rejected, handleRejected)
-      .addCase(updateContact.pending, handlePending)
-      .addCase(updateContact.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const { id, text, number } = action.payload;
-        const index = state.contacts.findIndex(contact => contact.id === id);
-        if (index !== -1) {
-          state.contacts[index] = { id, text, number };
-        }
-      })
-      .addCase(updateContact.rejected, handleRejected);
+      .addCase(deleteContact.rejected, handleRejected);
   },
 });
 

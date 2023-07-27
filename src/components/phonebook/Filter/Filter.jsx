@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterContacts } from '../../../redux/slices/contactSlicer';
 import styles from './Filter.module.css';
 
-const Filter = () => {
+export const Filter = () => {
   const dispatch = useDispatch();
   const filterValue = useSelector(state => state.filter);
 

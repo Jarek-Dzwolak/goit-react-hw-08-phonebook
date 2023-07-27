@@ -1,23 +1,40 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { contactReducer } from './slices/contactSlicer';
-import { persistStore, persistReducer } from 'redux-persist'; // Importuj potrzebne funkcje z redux-persist
-import storage from 'redux-persist/lib/storage'; // Wybierz rodzaj storage, który chcesz użyć (localStorage, sessionStorage, itp.)
 
-// Konfiguruj persystencję dla reducera 'contacts'
-const persistConfig = {
-  key: 'root', // Klucz, pod którym dane będą przechowywane w storage
-  storage, // Wybrany rodzaj storage
-  // Inne opcje konfiguracyjne, jeśli są potrzebne
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { authReducer } from './auth/slice';
+
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+];
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
 };
 
-const persistedReducer = persistReducer(persistConfig, contactReducer);
-
-// Skonfiguruj store, korzystając z persistedReducer
 export const store = configureStore({
   reducer: {
-    contacts: persistedReducer,
+    auth: persistReducer(authPersistConfig, authReducer),
+    contacts: contactReducer,
   },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development',
 });
 
-// Utwórz persistor z użyciem store
 export const persistor = persistStore(store);
