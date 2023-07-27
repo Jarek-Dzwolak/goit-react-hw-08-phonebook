@@ -39,10 +39,13 @@ const contactSlice = createSlice({
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, (state, action) => {
+        const contactId = action.payload.id;
+        state.contacts = state.contacts.filter(el => el.id !== contactId);
         state.isLoading = false;
-        state.contacts = state.contacts.filter(
-          contact => contact.id !== action.payload
-        );
+        state.error = null;
+        if (state.filter !== '') {
+          state.filter = state.filter.filter(el => el.id !== contactId);
+        }
       })
       .addCase(deleteContact.rejected, handleRejected);
   },
