@@ -8,8 +8,8 @@ body {
 }
 .container {
   font-family: 'Roboto';
-  width: 600px;
-  margin: 30px auto 0;
+
+  margin: 30px auto;
   display: flex;
   justify-content: center;
   background: #fff;
@@ -39,7 +39,7 @@ h2 small {
 input {
   font-size: 18px;
   padding: 10px 10px 10px 5px;
-  display: block;
+  display: flex;
   width: 300px;
   border: none;
   border-bottom: 1px solid #757575;
@@ -93,6 +93,25 @@ input:valid ~ label {
 }
 .bar:after {
   right: 50%;
+}
+.button {
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4caf50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.button:hover,
+.button:active,
+.button:focus {
+  background: #43a047;
 }
 
 /* active state */

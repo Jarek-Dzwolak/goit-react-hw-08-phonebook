@@ -9,12 +9,14 @@ export const ContactItem = ({ contact }) => {
   const handleRemove = () => dispatch(deleteContact(contact.id));
 
   return (
-    <li className={styles.item}>
-      {contact.name} {contact.number}
-      <button className={styles.button} onClick={handleRemove}>
-        Remove
-      </button>
-    </li>
+    <div className={styles.container}>
+      <li className={styles.item}>
+        {contact.name} {contact.number}
+        <button className={styles.button} onClick={handleRemove}>
+          Remove
+        </button>
+      </li>
+    </div>
   );
 };
 
