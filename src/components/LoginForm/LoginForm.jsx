@@ -21,14 +21,20 @@ export const LoginForm = () => {
   return (
     <div className={css.container}>
       <form className={css.form} onSubmit={handleSubmit}>
-        <label className={css.label}>
-          Email
-          <input type="email" name="email" className={css.input} />
-        </label>
-        <label className={css.label}>
-          Password
-          <input type="password" name="password" className={css.input} />
-        </label>
+        <div className={css.group}>
+          <input type="email" name="email" required />
+          <span className={css.highlight}></span>
+          <span className={css.bar}></span>
+          <label>Email</label>
+        </div>
+
+        <div className={css.group}>
+          <input type="password" name="password" required />
+          <span className={css.highlight}></span>
+          <span className={css.bar}></span>
+          <label>Password</label>
+        </div>
+
         <button type="submit" className={css.button}>
           Log in
         </button>

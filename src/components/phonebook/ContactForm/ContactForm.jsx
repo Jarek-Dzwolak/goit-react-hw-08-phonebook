@@ -25,29 +25,43 @@ export const ContactForm = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <input
-        className={styles.input}
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={name}
-        onChange={event => setName(event.target.value)}
-        pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
-      />
-      <input
-        className={styles.input}
-        type="text"
-        name="number"
-        placeholder="Phone number"
-        value={number}
-        onChange={event => setNumber(event.target.value)}
-        pattern="^\d{3}-\d{3}-\d{3}$"
-      />
-      <button className={styles.button} type="submit">
-        Add Contact
-      </button>
-    </form>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.group}>
+          <input
+            className={styles.input}
+            type="text"
+            name="name"
+            value={name}
+            onChange={event => setName(event.target.value)}
+            pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
+            required
+          />
+          <span className={styles.highlight}></span>
+          <span className={styles.bar}></span>
+          <label>Name</label>
+        </div>
+
+        <div className={styles.group}>
+          <input
+            className={styles.input}
+            type="text"
+            name="number"
+            value={number}
+            onChange={event => setNumber(event.target.value)}
+            pattern="^\d{3}-\d{3}-\d{3}$"
+            required
+          />
+          <span className={styles.highlight}></span>
+          <span className={styles.bar}></span>
+          <label>Phone Number</label>
+        </div>
+
+        <button className={styles.button} type="submit">
+          Add Contact
+        </button>
+      </form>
+    </div>
   );
 };
 
