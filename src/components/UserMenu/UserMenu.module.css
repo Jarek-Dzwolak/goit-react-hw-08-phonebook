@@ -2,10 +2,11 @@
 .wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   background-color: #f3f3f3;
   padding: 8px;
-  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .username {

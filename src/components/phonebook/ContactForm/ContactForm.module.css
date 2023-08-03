@@ -98,20 +98,20 @@ input:valid ~ label {
   font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4caf50;
+  background: #2a363b;
   width: 100%;
   border: 0;
   padding: 15px;
   color: #ffffff;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
 .button:hover,
 .button:active,
 .button:focus {
-  background: #43a047;
+  background-color: #0056b3;
 }
 
 /* active state */

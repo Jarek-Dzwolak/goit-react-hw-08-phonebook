@@ -3,8 +3,7 @@ body {
 }
 .container {
   font-family: 'Roboto';
-  width: 600px;
-  margin: 30px auto 0;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
   background: #fff;
@@ -41,6 +40,26 @@ input {
 }
 input:focus {
   outline: none;
+}
+
+.button {
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #2a363b;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+.button:hover,
+.button:active,
+.button:focus {
+  background-color: #0056b3;
 }
 
 /* LABEL ======================================= */
